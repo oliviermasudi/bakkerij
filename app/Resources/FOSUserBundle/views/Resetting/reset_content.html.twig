@@ -1,0 +1,24 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+    <div class="span12">
+        <h2>Wachtwoord opvragen</h2>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="span4">
+                    <em>
+                        Voer hieronder uw e-mailadres in waarmee u zichzelf heeft geregistreerd en klik op 'Opvragen' om uw wachtwoord per e-mail op te vragen.
+                    </em>
+                </div>
+
+                <div class="span4 offset2">
+                    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                        {{ form_widget(form) }}
+                        <div>
+                            <input type="submit" class="btn btn-primary" value="{{ 'resetting.reset.submit'|trans }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

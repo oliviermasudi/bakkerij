@@ -1,0 +1,45 @@
+<?php
+// src/Acme/UserBundle/Entity/User.php
+
+namespace Users\UsersBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="klanten")
+ */
+class Users extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+    * @ORM\OneToMany(targetEntity="BakkerijBundle\Bestelling", mappedBy="users", cascade={"persist","remove"})
+    * @ORM\JoinColumn(nullable=true)     
+    */
+
+    private $bestelling;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="Bakkerij\Bundle\Address", mappedBy="users", cascade={"remove"})
+    * @ORM\JoinColumn(nullable=true)     
+    */
+
+    private $address;    
+
+    public function __construct()
+    {
+        parent::__construct();
+        
+        $this->bestelling= new \Doctrine\Common\Collections\ArrayCollection();
+        $this->address= new \Doctrine\Common\Collections\ArrayCollection();
+        
+        // your own logic
+    }
+}

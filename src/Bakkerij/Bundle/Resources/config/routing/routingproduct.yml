@@ -1,0 +1,15 @@
+bakkerij_homepage:
+    path:     /
+    defaults: { _controller: BakkerijBundle:Products:index }
+     
+product_show:
+    path:     /product/{slug}
+    defaults: { _controller: BakkerijBundle:Products:show }
+
+categorieProduits:
+    path:     /categorie/{id}
+    defaults: { _controller: BakkerijBundle:Products:index }  
+    
+rechercheProduits:
+    path:     /recherche
+    defaults: { _controller: BakkerijBundle:Products:rechercheTraitement }  

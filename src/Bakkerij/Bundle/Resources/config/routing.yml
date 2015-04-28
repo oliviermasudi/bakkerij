@@ -1,0 +1,12 @@
+routingPanier: 
+    resource: "@BakkerijBundle/Resources/config/routing/routingmandje.yml"
+    prefix: /winkelmandje
+    
+routingProduct: 
+    resource: "@BakkerijBundle/Resources/config/routing/routingproduct.yml"
+    prefix: /
+ 
+        
+routingBank: 
+    resource: "@BakkerijBundle/Resources/config/routing/routingbank.yml"
+    prefix: /

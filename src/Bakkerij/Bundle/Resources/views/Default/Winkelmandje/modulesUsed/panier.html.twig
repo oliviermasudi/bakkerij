@@ -1,0 +1,13 @@
+        <div class="well">
+            <ul class="nav nav-list">                
+                <li class="nav-header">Winkel Mandje</li>
+                <a href="{{path('winkelmandje')}}">                    
+                    {% if articles == 0 %}
+                        Aucun article dans votre panier
+                    {%elseif articles == 1 %} 
+                        1 articles dans votre panier 
+                    {% else %}
+                        {{ articles}} articles dans votre panier                        
+                    {% endif %} </a>   
+            </ul>
+        </div>

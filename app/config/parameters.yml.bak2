@@ -1,0 +1,1 @@
+{ parameters: { database_driver: pdo_mysql, database_host: localhost, database_port: null, database_name: olivies8_bakkerij, database_user: olivies8_masudi, database_password: matthieu007, mailer_transport: smtp, mailer_host: localhost, mailer_user: null, mailer_password: null, locale: nl, secret: 9918c258f37b2569e679dce5c2ef61872a343ae6, database_path: null } }

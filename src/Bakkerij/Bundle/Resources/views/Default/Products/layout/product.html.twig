@@ -1,0 +1,47 @@
+{% extends "::layout/layout.html.twig" %} 
+{% block titrepage %}{{ product.getNaam }}{% endblock %}
+{% block descriptionpage %}{{ product.getInfo }}{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">  
+            <div class="span3">
+            {% include "::modulesUsed/navigation.html.twig" %}
+            {% render(controller('BakkerijBundle:Winkelmandje:menu')) %}
+            </div>
+            <div class="span9">
+				<div class="row">
+					<div class="span5">
+						<img src="{{ asset('img/')}}{{product.getPicture}}" alt="{{ product.getNaam }}" width="470" height="310">
+					</div>
+
+					<div class="span4">
+						<h4>{{ product.categorie.naam }}</h4>
+						<h5>{{ product.getNaam }}</h5>
+						<p>{{ product.getInfo }}</p>
+						<h4>{{ product.getPrijs }} €</h4>
+                                                {% if panier[product.id] is not defined%}    
+						<form action="{{ path('ajouter', {'id' :  product.id } ) }}" method="GET">
+					
+
+							<select name="qte" class="span1">
+                                                            {% for i in 1..10 %}
+								<option value="{{ i }}">{{ i }}</option>
+                                                            {% endfor %}
+							</select>
+
+							<div>
+							    <button class="btn btn-primary">Toevoegen aan winkelwagen</button>
+							</div>
+						</form>
+                                                {% else %}
+                                                    <div>
+						     <a href="{{ path('winkelmandje') }}" class="btn btn-primary">Product al in de winkelwagen</a>
+						    </div>
+                                                {% endif %}
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>       
+{% endblock %}

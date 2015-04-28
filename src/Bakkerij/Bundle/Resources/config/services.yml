@@ -1,0 +1,15 @@
+services:
+    
+    setNewReference:
+        class: Bakkerij\Bundle\Services\getReference
+        arguments: [ésecurity.context,@doctrine.orm.entity_manager]
+    
+    tva:
+        class: Bakkerij\Bundle\Twig\Extension\TvaExtension
+        tags:
+            - { name: twig.extension }
+    redirectionListener:
+        class: Bakkerij\Bundle\Listener\RedirectionListener
+        arguments: [@service_container,@session]
+        tags:
+            - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest}

@@ -1,0 +1,169 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of klanten
+ *
+ * @author olivier.masudi
+ */
+
+    
+namespace Bakkerij\Bundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+  
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="bestelling")
+ * @ORM\Entity(repositoryClass="Bakkerij\Bundle\Repository\BestellingRepository")
+ */
+class Bestelling {
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $datum;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */      
+    private $status;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Bestelproduct", mappedBy="bestelling")
+     */       
+    private $bestelproducten;
+    
+    
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="Users\UsersBundle\Users", inversedBy="bestelling" )
+    * @ORM\JoinColumn(nullable=true)     
+    */
+
+    private $users;
+    
+
+    private function __construct() {
+
+
+    }
+
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getIdKlant() {
+        return $this->idklant;
+    }
+
+    public function getDatum() {
+        return $this->datum;
+    }    
+
+     public function setId($id) {
+        $this->id=$id;
+    }
+
+    public function setIdKlant($idklant) {
+        $this->idklant=$idklant;
+    }
+
+    public function setDatum($datum) {
+        $this->datum=$datum;
+    }
+
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Bestelling
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set Klant
+     *
+     * @param \Bakkerij\Bundle\Entity\Klant $klant
+     * @return Bestelling
+     */
+    public function setKlant(\Bakkerij\Bundle\Entity\Klant $klant = null)
+    {
+        $this->Klant = $klant;
+
+        return $this;
+    }
+
+    /**
+     * Get Klant
+     *
+     * @return \Bakkerij\Bundle\Entity\Klant 
+     */
+    public function getKlant()
+    {
+        return $this->Klant;
+    }
+
+    /**
+     * Add bestelproducten
+     *
+     * @param \Bakkerij\Bundle\Entity\Bestelproduct $bestelproducten
+     * @return Bestelling
+     */
+    public function addBestelproducten(\Bakkerij\Bundle\Entity\Bestelproduct $bestelproducten)
+    {
+        $this->bestelproducten[] = $bestelproducten;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestelproducten
+     *
+     * @param \Bakkerij\Bundle\Entity\Bestelproduct $bestelproducten
+     */
+    public function removeBestelproducten(\Bakkerij\Bundle\Entity\Bestelproduct $bestelproducten)
+    {
+        $this->bestelproducten->removeElement($bestelproducten);
+    }
+
+    /**
+     * Get bestelproducten
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBestelproducten()
+    {
+        return $this->bestelproducten;
+    }
+}

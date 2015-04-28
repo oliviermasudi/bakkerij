@@ -1,0 +1,23 @@
+winkelmandje:
+    path:     /
+    defaults: { _controller: BakkerijBundle:Winkelmandje:winkelmandje }    
+
+delivery:
+    path:     /delivery
+    defaults: { _controller: BakkerijBundle:Winkelmandje:delivery }    
+    
+validation:
+    path:     /validation
+    defaults: { _controller: BakkerijBundle:Winkelmandje:validation }    
+   
+ajouter:
+    path:     /ajouter/{id}
+    defaults: { _controller: BakkerijBundle:Winkelmandje:ajouter }  
+    
+supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: BakkerijBundle:Winkelmandje:supprimer }       
+   
+livraisonaddressesupression:
+    path:     /livraison/adresse/suppression/{id}
+    defaults: { _controller: BakkerijBundle:Winkelmandje:addresssupprimer }  

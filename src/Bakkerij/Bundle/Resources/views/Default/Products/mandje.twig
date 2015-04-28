@@ -1,0 +1,39 @@
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">Winkelmandje</div>
+        <div class="panel-body">
+
+            <table class="table">
+                <tr>
+                <thead>
+                    <tr>
+                        <th data-field="product">Producten naam</th>
+                        <th data-field="aantal">Aantal</th>
+                        <th data-field="prijs">Prijs</th>
+                        <th data-field="delete"></th>
+                    </tr>
+                <thead>
+                    {% set totaal = 0 %}          
+                    {% for producteninmandje in winkel %}
+                        <tr>
+                            <td><a href="producteninfo.php?id={{ producteninmandje.getId }}&q={{ producteninmandje.getAantal }}"> {{ producteninmandje.getProductNaam }}</a></td>
+                            <td>{{ producteninmandje.getAantal }}</td>
+                            <td>{{ "%.2f €"|format(producteninmandje.getProductPrijs*producteninmandje.getAantal) }}</td>
+                            <td><a href="producteninfo.php?action=verwijder&id={{ producteninmandje.getId }}"><img src="src/VDAB/Classes/img/icon-delete.png"></a></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>Totaal</td>
+                        <td></td>
+                        <td>{{ "%.2f €"|format(winkelmandje.gettotal) }}</td>
+                        <td></th>
+                    </tr>
+            </table>
+            <p></p>      
+            <form action="bestel.php" method="POST">
+                <p></p>
+                <button class="btn btn-xs btn-success" name="Afrekenen" type="submit" >Afrekenen »</button>
+            </form>
+        </div>
+    </div>
+</div>

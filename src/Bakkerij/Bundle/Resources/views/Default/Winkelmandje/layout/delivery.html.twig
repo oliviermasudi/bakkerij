@@ -1,0 +1,53 @@
+{% extends "::layout/layout.html.twig" %} 
+{% block content %}
+    <div class="container">
+        <div class="row">  
+            <div class="span12">
+                <h2>Leveringswijze</h2>
+                <div id="collapseOne" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div class="span4">
+                            {% if utilisateur.address|length !=0  %}
+                                <form action="{{ path("validation") }}" method="POST">
+                                    
+                                    <h4>Bezorgadres</h4>
+                                    {% for address in utilisateur.address %}
+                                        <label class="radio">
+                                            <input type="radio" name="livraison"  value="{{address.id }}" checked="">
+                                            {{address.address }}, {{address.pc }} {{address.stad }} -  {{address.land }} <a href="{{ path('livraisonaddressesupression', { 'id' : address.id })}}"><i class="icon-trash"></i></a>
+                                            <br> {{address.voornaam }} {{address.naam }}
+                                        </label>
+                                    {% endfor %}
+                                    
+                                    <br><br>                                    
+                                    
+                                    <h4>Correspondentieadres</h4>
+                                    {% for address in utilisateur.address %}
+                                        <label class="radio">
+                                            <input type="radio" name="facturation"  value="{{address.id }}" checked="">
+                                            {{address.address }}, {{address.pc }} {{address.stad }} -  {{address.land }} <a href="{{ path('livraisonaddressesupression', { 'id' : address.id })}}"><i class="icon-trash"></i></a>
+                                            <br> {{address.voornaam }} {{address.naam }}
+                                        </label>
+                                    {% endfor %}
+                                    <br />
+                                    <button class="btn btn-primary">Valideren mijn bezorgadres en correspondentieadres</button>
+                                </form>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="span4 offset2">
+                            <h4>Nieuwe adres</h4>
+                            <form action="{{ path('delivery')}}" method="POST">
+                                {{ form_widget(form) }}     
+                                <br />
+                                <button class="btn btn-primary" type="submit">Toevoeging</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>       
+{% endblock %}

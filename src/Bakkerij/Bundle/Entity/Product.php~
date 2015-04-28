@@ -1,0 +1,226 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of product
+ *
+ * @author olivier.masudi
+ */
+
+namespace Bakkerij\Bundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="Bakkerij\Bundle\Repository\ProductRepository")
+ */
+class Product {
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $naam;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $prijs;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $info;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $picture;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="producten")
+     * @ORM\JoinColumn(name="idcat", referencedColumnName="id")
+     */
+    private $categorie;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Subcategorie", inversedBy="producten")
+     * @ORM\JoinColumn(name="idsubcat", referencedColumnName="id")
+     */
+    private $subcategorie;
+    
+        
+    /**
+     * @ORM\OneToMany(targetEntity="Bestelproduct", mappedBy="product")
+     */
+    
+    private $bestelproducten;
+        
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Media",  cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $image;
+    
+
+    public function __construct() {
+
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId() {
+        return $this->id;        
+    }
+    
+    /**
+     * Get naam
+     *
+     * @return string
+     */
+    public function getNaam() {
+        return $this->naam;
+    }
+    /**
+     * Get prijs
+     *
+     * @return string
+     */
+    public function getPrijs() {
+        return $this->prijs;
+    }
+    /**
+     * Get info
+     *
+     * @return string
+     */
+    public function getInfo() {
+        return $this->info;
+    }
+    /**
+     * Get pcture
+     *
+     * @return string
+     */
+    public function getPicture() {
+        return $this->picture;
+    }
+    
+    /**
+     * Set id
+     *
+     * @param intiger $id
+     * @return string
+     */
+    public function setId($id) {
+        $this->id = $id;
+        return $this->id;         
+    }
+    /**
+     * Set naam
+     *
+     * @param string $naam
+     * @return string
+     */
+    public function setNaam($voornaam) {
+        $this->voornaam = $naam;
+        return $this->naam;        
+    }
+    /**
+     * Set prijs
+     *
+     * @param string $prijs
+     * @return string
+     */
+    public function setPrijs($prijs) {
+        $this->familienaam = $prijs;
+        return $this->prijs;        
+    }
+    
+    /**
+     * Set info
+     *
+     * @param string $info
+     * @return string
+     */
+    public function setInfo($info) {
+        $this->adres = $info;
+        return $this->info;        
+    }
+    
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     * @return string
+     */
+    public function setPicture($picture) {
+        $this->picture = $picture;
+        return $this->picture;
+    }
+    
+    /**
+     * Set categorien
+     *
+     * @param \Acme\StoreBundle\Entity\Categorie $categorie
+     * @return Categorie
+     */
+    public function setCategorie(\Acme\StoreBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Acme\StoreBundle\Entity\Categorie 
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }    
+    
+     /**
+     * Set subcategorie
+     *
+     * @param \Acme\StoreBundle\Entity\Subcategorie $subcategorie
+     * @return Subcategorie
+     */
+    public function setSubcategorie(\Acme\StoreBundle\Entity\Subcategorie $subcategorie = null)
+    {
+        $this->subcategorie = $subcategorie;
+
+        return $this;
+    }
+
+    /**
+     * Get subcategorie
+     *
+     * @return \Acme\StoreBundle\Entity\Subcategorie 
+     */
+    public function getSubcategorie()
+    {
+        return $this->subcategorie;
+    }    
+    
+    
+
+}

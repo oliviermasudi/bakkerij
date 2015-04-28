@@ -1,0 +1,26 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+    <div class="span12">
+        <h2>Inloggen </h2>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="span4">
+                    <h4>Nieuw account aanmaken</h4>
+                    <em>
+                        
+                    </em>
+                </div>
+
+                <div class="span4 offset2">
+                    <h4>Accountgegevens</h4>
+                    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                        {{ form_widget(form) }}
+                        <div>
+                            <input type="submit" class="btn btn-primary" value="{{ 'registration.submit'|trans }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

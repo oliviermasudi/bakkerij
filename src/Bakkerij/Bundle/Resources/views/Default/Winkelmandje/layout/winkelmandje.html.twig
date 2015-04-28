@@ -1,0 +1,76 @@
+{% extends "::layout/layout.html.twig" %} 
+{% block content %}
+    <div class="container">
+        <div class="row">  
+            <div class="span3">
+                {% include "::modulesUsed/navigation.html.twig" %}      
+            </div>
+            <div class="span9">
+                
+                
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                
+                <h2>Mijn winkelmandje</h2>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Artikel</th>
+                            <th>Aantal</th>
+                            <th>Prijs</th>
+                            <th>Totaal ZBTW</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% if products|length == 0 %}
+                            <tr><td colspan="4"><center>Geen items in uw winkelwagen</center></td></tr>
+                        {% endif %}
+                        {% set total = 0 %}
+                        {% for product in products %}
+                            {% set id = product.id %}
+                        <tr>
+                            <td>{{ product.naam}}</td>
+                            <td>
+                                <form action="{{ path('ajouter', { 'id' : product.id})}}" method="GET">
+                                    <select name="qte" class="span1" onChange="this.form.submit()">
+                                        {% for i in 1..10 %}
+                                            <option value="{{i}}"
+                                                    {% if i == panier[id] %} SELECTED {% endif %}                                                  
+                                                    >{{ i }}</option>
+                                        {% endfor %}
+                                    </select>                                    
+                                    &nbsp;                                    
+                                    <a href="{{ path('supprimer', { 'id' :  product.id } )}}"><i class="icon-trash"></i></a>
+                                </form>
+                            </td>
+                            <td>{{ product.prijs}}€</td>
+                            <td>{{ product.prijs * panier[id]}}€</td>
+                        </tr>
+                        {% set total = total + (product.prijs * panier[id])   %}
+                    {% endfor %}                           
+                    </tbody>
+                </table>
+                {% if products|length != 0 %}
+                    <dl class="dl-horizontal pull-right">
+                        <dt>Total HT :</dt>
+                        <dd>{{ total }}€</dd>
+
+                        <dt>TVA :</dt>
+                        <dd>{{ total * 0.21 }}€</dd>
+
+                        <dt>Total:</dt>
+                        <dd>{{ total + (total * 0.21)  }}€</dd>
+                    </dl>
+                    <div class="clearfix"></div>
+                    <a href="{{ path('delivery') }}" class="btn btn-success pull-right">Betalen</a>
+                {% endif %}
+                <a href="{{ path('bakkerij_homepage') }}" class="btn btn-primary">Verder winkelen</a>
+
+            </div>
+        </div>
+    </div>       
+{% endblock %}

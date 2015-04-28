@@ -1,0 +1,31 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+    <div class="span12">
+        <h2>Wachtwoord opvragen</h2>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="span4">
+                    <h4>Vous avez perdu votre mot de passe ?</h4>
+                    <em>
+                        Voer hieronder uw e-mailadres in waarmee u zichzelf heeft geregistreerd en klik op 'Opvragen' om uw wachtwoord per e-mail op te vragen.
+                    </em>
+                </div>
+
+                <div class="span4 offset2">
+                    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+                        <div>
+                            {% if invalid_username is defined %}
+                                <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                            {% endif %}
+                            <label for="username">{{ 'resetting.request.username'|trans }}</label>
+                            <input type="text" id="username" name="username" required="required" />
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-primary" value="{{ 'resetting.request.submit'|trans }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+{% extends "::layout/layout.html.twig" %} 
+{% block content %}
+    <div class="container">
+        <div class="row">  
+            <div class="span3">
+                {% include "::modulesUsed/navigation.html.twig" %} 
+                {% if is_granted('IS_AUTHENTICATED_FULLY')   %}
+                {% include "UsersBundle:Default:modulesUsed/usersconnected.html.twig" %}
+                {% else %}
+                {% include "UsersBundle:Default:modulesUsed/users.html.twig" %}    
+                {% endif %}
+                {% render(controller('BakkerijBundle:Winkelmandje:menu')) %}
+            </div>
+            <div class="span9">
+                {% if product|length != 0 %}
+                    <ul class="thumbnails">
+                        {% for producten in product %} 
+                            <li class="span3">
+                                <div class="thumbnail">
+                                    <img src="{{ asset('img/')}}{{producten.getImage().getPath()}}" alt="{{ producten.getImage().getPath() }}" width="300" height="300">
+                                    <div class="caption">
+                                        <h4>{{ producten.getNaam() }}</h4>
+                                        <p>{{ producten.getPrijs() }} €</p>
+                                        <a class="btn btn-primary" href="{{ path('product_show', { 'slug': producten.getId }) }}">Meer info</a>
+                                        {% if panier[producten.id] is not defined %}    
+                                        <a class="btn btn-success" href="{{ path('ajouter', {'id' :  producten.id } ) }}">Bestel</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="pagination">
+                        {{ knp_pagination_render(product) }}
+                    </div>
+                {% else %}
+                    Geen artikel 
+                {% endif%}
+            </div>
+        </div>
+    </div>
+{% endblock%}
